@@ -2,8 +2,6 @@
 <html>
 <head>
   <title>ShoppingList</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <skript src = "./main.js>"></skript>
 </head>
 <body>
@@ -13,12 +11,12 @@
       <a class="brand-logo center">Shopping List</a>   
     </div>
   </nav>
-  <p>
+
     <label>
       <input type="checkbox" class="filled-in" checked="checked" />
       <span></span>
     </label>
-  </p>
+
   <ul></ul>
 
   <script>
@@ -32,11 +30,26 @@
       ul.className = 'collection';
       const li = document.createElement('li');
       li.className = 'collection-item';
-      const itemText = document.createTextNode(item);
 
+      lab = document.createElement('label');
+      i = document.createElement('input');
+      i.setAttribute('class','filled-in');
+      i.setAttribute('type','checkbox');
+      i.setAttribute('checked','checked');
+      s = document.createElement('span');
+
+      i.appendChild(s);
+      lab.appendChild(i);
+      
+
+      const itemText = document.createTextNode(item);
+      console.log(lab);
+      console.log(itemText);
       li.appendChild(itemText);
+      li.appendChild(lab);
       ul.appendChild(li);
     });
+
 
     ipcRenderer.on('item:clear', function(){
       ul.className = '';
