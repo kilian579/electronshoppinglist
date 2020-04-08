@@ -97,7 +97,11 @@ if(process.env.NODE_ENV !== 'production'){
     label: 'Developer Tools',
     submenu:[
       {
-        role: 'reload'
+        role: 'reload',
+        accelerator:'F5',
+        click(item, focusedWindow){
+        focusedWindow.reload();
+        }
       },
       {
         label: 'Toggle DevTools',

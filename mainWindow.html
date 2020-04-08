@@ -2,20 +2,31 @@
 <html>
 <head>
   <title>ShoppingList</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <skript src = "./main.js>"></skript>
 </head>
 <body>
   <nav>
     <div class="nav-wrapper">
+      <button id="attach" class="btn-floating btn-large waves-effect waves-light red" type="submit"><i class="material-icons">attach_file</i></button>
       <a class="brand-logo center">Shopping List</a>   
     </div>
   </nav>
+  <p>
+    <label>
+      <input type="checkbox" class="filled-in" checked="checked" />
+      <span></span>
+    </label>
+  </p>
   <ul></ul>
 
   <script>
     const electron = require('electron');
-    const {ipcRenderer} = electron;
+    const path = require('path');
+    const {ipcRenderer, BrowserWindow} = electron;
     const ul = document.querySelector('ul');
+
 
     ipcRenderer.on('item:add', function(e, item){
       ul.className = 'collection';
@@ -37,9 +48,9 @@
     function removeItem(e){
       event.target.remove();
       if(ul.children.length == 0){
-        ul.className = '';
       }
     }
+  
   </script>
 </body>
 </html>
