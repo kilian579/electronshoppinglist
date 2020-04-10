@@ -10,6 +10,7 @@ const {app, BrowserWindow, Menu, ipcMain} = electron;
 let mainWindow;
 let addWindow;
 
+
 // Listen for app to be ready
 app.on('ready', function(){
   // Create new window
@@ -48,6 +49,11 @@ function createAddWindow(){
     addWindow = null;
   });
 }
+
+//Receive & respond to "add:window" messages
+ipcMain.on('window:add',function(e,arg){
+  createAddWindow();
+});
 
 // Catch item:add
 ipcMain.on('item:add', function(e, item){

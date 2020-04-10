@@ -2,12 +2,21 @@
 <html>
 <head>
   <title>ShoppingList</title>
-  <skript src = "./main.js>"></skript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script>
+    const electron = require('electron'); //Access to all electron functions
+    const {ipcRenderer} = electron; //Send messages to main using ipcRenderer
+    function createAddWindow(){
+      //Call this function to send an "window:add" message to main
+      ipcRenderer.send('window:add', null);
+    }
+  </script>
 </head>
 <body>
   <nav>
     <div class="nav-wrapper">
-      <button id="attach" class="btn-floating btn-large waves-effect waves-light red" type="submit"><i class="material-icons">attach_file</i></button>
+      <button id="attach" class="btn-floating btn-large waves-effect waves-light red" type="submit" onclick="createAddWindow()"><i class="material-icons">attach_file</i></button>
       <a class="brand-logo center">Shopping List</a>   
     </div>
   </nav>
@@ -20,9 +29,9 @@
   <ul></ul>
 
   <script>
-    const electron = require('electron');
     const path = require('path');
-    const {ipcRenderer, BrowserWindow} = electron;
+    const url = require('url');
+    
     const ul = document.querySelector('ul');
 
 
@@ -50,6 +59,7 @@
       ul.appendChild(li);
     });
 
+    
 
     ipcRenderer.on('item:clear', function(){
       ul.className = '';
@@ -57,6 +67,7 @@
     });
 
     ul.addEventListener('dblclick', removeItem);
+
 
     function removeItem(e){
       event.target.remove();
